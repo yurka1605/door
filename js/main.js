@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+    $('.phone').each((_, el) => $(el).mask('+7 (999) 999-99-99'));
+
     $('.door__wrap').addClass('active');
     $('.door__main').addClass('active');
     var mySwiper = new Swiper('.swiper-container', {
@@ -89,17 +91,79 @@ $( document ).ready(function() {
     });
     $('.mobile__menu-close').on('click', function () {
         $('html, body').removeClass('active-menu'); 
-    })
+    });
+
+    $('.catalog-btn').on('click', function () {
+        openPopup('catalog');
+    });
+
+    $('.popup__close').on('click', closePopup);
+
+    $('.footer-btn, .header-btn, .buy-btn').on('click', function () {
+        openPopup('callme');
+        $('html, body').removeClass('active-menu');
+    });
+
+    $('input').on('change', function () {
+        $(this).removeClass('error');
+    });
+
+    $('.submit').on('click', function (e) {
+        e.preventDefault();
+        // собираем данные с формы и отправляем
+        const data = {};
+        const fields = $(this).prev().children();
+        fields.each((i, el) => {
+            let key = '';
+            switch ($(el).data('type')) {
+                case 'name':
+                    key = 'Имя';
+                    break;
+                case 'phone':
+                    key = 'Телефон';
+                    break;
+                default:
+                    key = 'Почта';
+                    break;
+            }
+            const isRequire = $(el).data('required');
+            const val = $(el).children('.input').children('input').val();
+            if (isRequire && val === '') {
+                $(el).children('.input').children('input').addClass('error');
+                return false;
+            }
+            data[key] = val;
+        });
+
+        let counter = 0;
+
+        for (var key in data) {
+            counter++;
+        }
+
+        if (counter != fields.length) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: 'mail.php',
+            data: data
+        }).done(function (e) {
+            fields.each((i, el) => $(el).children('.input').children('input').val(''));
+            $('.popup__thx').addClass('active');
+        }).fail(function(e) {
+            console.log(e);
+        });
+    });
 });
 
-function openPopup() {
+function openPopup(selector) {
     $('body').addClass('modal-active');
-    $('<div>', { class: 'popup__close-btn', text: '×', click: function () {
-        closePopup();
-    }}).appendTo('.popup');
+    $(`.popup__${ selector }`).addClass('active');
 }
 
 function closePopup() {
     $('body').removeClass('modal-active');
-    $('.popup').html('');
+    $('.popup').children().each((i, el) => $(el).removeClass('active'));
 }

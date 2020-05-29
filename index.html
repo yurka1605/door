@@ -913,19 +913,19 @@
                                 <span style="font-size: 22px;"><br>на бесплатную консультацию</span>
                             </p>
                         </div>
-                        <form class="form">
+                        <form data-form="stock" class="form">
                             <div class="fields">
-                                <div class="field" data-type="name">
+                                <div class="field" data-type="name" data-required="false">
                                     <div class="input">
                                         <input class="form-control" style="border-radius: 2px;" placeholder="Имя" type="text">
                                     </div>
                                 </div>
-                                <div class="field" data-type="phone">
+                                <div class="field" data-type="phone" data-required="true">
                                     <div class="input">
-                                        <input class="form-control" style="border-radius: 2px;" placeholder="Телефон *" type="text">
+                                        <input class="form-control phone" style="border-radius: 2px;" placeholder="Телефон *" type="text">
                                     </div>
                                 </div>
-                                <div class="field" data-type="email">
+                                <div class="field" data-type="email" data-required="true">
                                     <div class="input">
                                         <input class="form-control" style="border-radius: 2px;" placeholder="Email *" type="text">
                                     </div>
@@ -967,7 +967,62 @@
         </div>
     </footer>
     <div class="popup-bg"></div>
-    <div class="popup"></div>
+    <div class="popup">
+        <div class="popup__catalog">
+            <div class="popup__close">
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <div class="popup__header">Оставьте данные, чтобы получить каталог на email</div>
+            <div class="popup__body">
+                <form data-form="catalog" class="form">
+                    <div class="fields">
+                        <div class="field" data-type="name" data-required="false">
+                            <div class="input">
+                                <input class="form-control" style="border-radius: 2px;" placeholder="Имя" type="text">
+                            </div>
+                        </div>
+                        <div class="field" data-type="phone" data-required="true">
+                            <div class="input">
+                                <input class="form-control phone" style="border-radius: 2px;" placeholder="Телефон *" type="text">
+                            </div>
+                        </div>
+                        <div class="field" data-type="email" data-required="true">
+                            <div class="input">
+                                <input class="form-control" style="border-radius: 2px;" placeholder="Email *" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn submit" type="submit">Получить каталог</button>
+                </form>
+            </div>
+        </div>
+        <div class="popup__callme">
+            <div class="popup__close">
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <div class="popup__header">Oставьте контактные данные и мы свяжемся с Вами в ближайшее время</div>
+            <div class="popup__body">
+                <form data-form="callme" class="form">
+                    <div class="fields">
+                        <div class="field" data-type="name" data-required="false">
+                            <div class="input">
+                                <input class="form-control" style="border-radius: 2px;" placeholder="Имя" type="text">
+                            </div>
+                        </div>
+                        <div class="field" data-type="phone" data-required="true">
+                            <div class="input">
+                                <input class="form-control phone" style="border-radius: 2px;" placeholder="Телефон *" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn submit" type="submit">Жду звонка</button>
+                </form>
+            </div>
+        </div>
+        <div class="popup__thx">
+            Ваша заявка успешно отправлена
+        </div>
+    </div>
     <a class="btn-up" href="#main">Наверх</a>
     <div class="mobile__menu">
         <div class="mobile__menu-close">
@@ -1013,6 +1068,7 @@
     </div>
     <script src="./js/jquery-3.5.0.min.js"></script>
     <script src="./js/swiper.js"></script>
+    <script src="./js/jquery.maskedinput.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
