@@ -2,6 +2,7 @@ $( document ).ready(function() {
     $('.door__wrap').addClass('active');
     $('.door__main').addClass('active');
     var mySwiper = new Swiper('.swiper-container', {
+        slidesPerView: 3,
         loop: true,
         pagination: {
             el: '.swiper-pagination',
@@ -13,6 +14,14 @@ $( document ).ready(function() {
         scrollbar: {
             el: '.swiper-scrollbar',
         },
+        breakpoints: {
+            480: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+          }
     });
 
     $('.tabs__control').on('click', function () {
@@ -56,6 +65,7 @@ $( document ).ready(function() {
         if (target.length) {
             // Only prevent default if animation is actually gonna happen
             event.preventDefault();
+            $('html, body').removeClass('active-menu');
             $('html, body').animate({
             scrollTop: target.offset().top
             }, 1000, function() {
@@ -73,6 +83,13 @@ $( document ).ready(function() {
         }
         }
     });
+
+    $('.header__mobile-btn').on('click', function () {
+        $('html, body').addClass('active-menu'); 
+    });
+    $('.mobile__menu-close').on('click', function () {
+        $('html, body').removeClass('active-menu'); 
+    })
 });
 
 function openPopup() {
